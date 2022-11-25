@@ -5,7 +5,7 @@ import router from "./Routes/Routes/Routes";
 
 function App() {
   return (
-    <div className="lg:mx-11">
+    <div>
       <RouterProvider router={router}></RouterProvider>
       <Toaster></Toaster>
     </div>
