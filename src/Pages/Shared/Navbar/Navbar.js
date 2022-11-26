@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
+import Spinner from "../../../components/Spinner/Spinner";
+import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 
 const Navbar = () => {
+  const { user, loading, setLoading, logOut } = useContext(AuthContext);
   const location = useLocation();
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((error) => console.error(error));
+  };
 
   const menuItems = (
     <>
@@ -13,20 +22,22 @@ const Navbar = () => {
         <Link to="/blog">Blog</Link>
       </li>
 
-      {/* {user?.uid ? (
-      <>
+      {loading ? (
+        <Spinner small={true}></Spinner>
+      ) : user?.uid ? (
+        <>
+          <li>
+            <Link to="/dashboard">Dashboard</Link>
+          </li>
+          <li>
+            <button onClick={handleLogOut}>Sign Out</button>
+          </li>
+        </>
+      ) : (
         <li>
-          <Link to="/dashboard">Dashboard</Link>
+          <Link to="/login">Login</Link>
         </li>
-        <li>
-          <button onClick={handleLogOut}>Sign Out</button>
-        </li>
-      </>
-    ) : ( */}
-      <li>
-        <Link to="/login">Login</Link>
-      </li>
-      {/* )} */}
+      )}
     </>
   );
 
