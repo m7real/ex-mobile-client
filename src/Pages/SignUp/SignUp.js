@@ -16,6 +16,7 @@ const SignUp = () => {
   const [token] = useToken(createdUserEmail);
   const navigate = useNavigate();
 
+  // will navigate after getting jwt token
   if (token) {
     navigate("/");
   }
@@ -50,6 +51,7 @@ const SignUp = () => {
       });
   };
 
+  // save user in the database
   const saveUser = (name, email, role = "buyer") => {
     const user = { name, email, role };
     fetch("http://localhost:5000/users", {
@@ -103,14 +105,14 @@ const SignUp = () => {
               <span className="label-text">Name</span>
             </label>
             <input type="text" {...register("name", { required: "Name is required" })} className="input input-bordered w-full max-w-xs" />
-            {errors.name && <p className="text-red-500 mt-2">{errors.name?.message}</p>}
+            {errors.name && <p className="text-red-500 text-sm mt-2">{errors.name?.message}</p>}
           </div>
           <div className="form-control w-full max-w-xs">
             <label className="label">
               <span className="label-text">Email</span>
             </label>
             <input type="email" {...register("email", { required: "Email is required" })} className="input input-bordered w-full max-w-xs" />
-            {errors.email && <p className="text-red-500 mt-2">{errors.email?.message}</p>}
+            {errors.email && <p className="text-red-500 text-sm mt-2">{errors.email?.message}</p>}
           </div>
           <div className="form-control w-full max-w-xs">
             <label className="label">
@@ -124,7 +126,7 @@ const SignUp = () => {
               })}
               className="input input-bordered w-full max-w-xs"
             />
-            {errors.password && <p className="text-red-500 mt-2">{errors.password?.message}</p>}
+            {errors.password && <p className="text-red-500 text-sm mt-2">{errors.password?.message}</p>}
           </div>
           <div className="form-control w-full max-w-xs">
             <label className="label">
@@ -134,7 +136,7 @@ const SignUp = () => {
               <option value="buyer">Buyer</option>
               <option value="seller">Seller</option>
             </select>
-            {errors.role && <p className="text-red-500 mt-2">{errors.role.message}</p>}
+            {errors.role && <p className="text-red-500 text-sm mt-2">{errors.role.message}</p>}
           </div>
           <input className="btn btn-accent w-full mt-4 mb-2" value="Sign Up" type="submit" />
           {signUpError && <p className="text-red-500  my-1 text-center">{signUpError}</p>}
