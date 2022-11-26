@@ -5,10 +5,11 @@ import { Link, useNavigate } from "react-router-dom";
 import Spinner from "../../components/Spinner/Spinner";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import useToken from "../../hooks/useToken";
+import { FcGoogle } from "react-icons/fc";
 
 const SignUp = () => {
   const { register, handleSubmit, formState: { errors }, } = useForm(); // prettier-ignore
-  const { createUser, updateUserProfile, loading, setLoading } = useContext(AuthContext);
+  const { createUser, updateUserProfile, signInWithGoogle, loading, setLoading } = useContext(AuthContext);
   const [signUpLoading, setSignUpLoading] = useState(false);
   const [signUpError, setSignUpError] = useState("");
   const [createdUserEmail, setCreatedUserEmail] = useState("");
@@ -26,7 +27,7 @@ const SignUp = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
-        toast.success("User Created Successfully");
+        toast.success("Sign Up Successful");
         const userInfo = {
           displayName: data.name,
         };
@@ -67,6 +68,24 @@ const SignUp = () => {
       .catch((err) => {
         console.error(err);
         setSignUpLoading(false);
+      });
+  };
+
+  const handleGoogleLogin = () => {
+    setSignUpLoading(true);
+    signInWithGoogle()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        saveUser(user.displayName, user.email);
+      })
+      .catch((error) => {
+        console.error(error);
+        setSignUpError(error.message);
+        setSignUpLoading(false);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -117,17 +136,19 @@ const SignUp = () => {
             </select>
             {errors.role && <p className="text-red-500 mt-2">{errors.role.message}</p>}
           </div>
-          <input className="btn btn-accent w-full mt-4" value="Sign Up" type="submit" />
-          {signUpError && <p className="text-red-500">{signUpError}</p>}
+          <input className="btn btn-accent w-full mt-4 mb-2" value="Sign Up" type="submit" />
+          {signUpError && <p className="text-red-500  my-1 text-center">{signUpError}</p>}
         </form>
-        <p>
+        <p className="text-center text-sm">
           Already have an account?{" "}
           <Link className="text-secondary" to="/login">
             Login Here
           </Link>
         </p>
         <div className="divider">OR</div>
-        <button className="btn btn-outline w-full">CONTINUE WITH GOOGLE</button>
+        <button onClick={handleGoogleLogin} className="btn btn-outline w-full">
+          <FcGoogle className="mr-3 text-lg"></FcGoogle> CONTINUE WITH GOOGLE
+        </button>
       </div>
     </div>
   );
