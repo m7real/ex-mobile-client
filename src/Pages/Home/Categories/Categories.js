@@ -2,6 +2,7 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Category from "./Category";
+import Spinner from "../../../components/Spinner/Spinner";
 
 const Categories = () => {
   const { data: categories = [], isLoading } = useQuery({
@@ -11,6 +12,10 @@ const Categories = () => {
       return data.data;
     },
   });
+
+  if (isLoading) {
+    return <Spinner small={true}></Spinner>;
+  }
 
   return (
     <div>
