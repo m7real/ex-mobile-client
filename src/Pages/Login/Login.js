@@ -122,7 +122,7 @@ const Login = () => {
         <p className="text-center text-sm">
           New to Ex Mobile?{" "}
           <Link className="text-secondary" to="/signup">
-            Create new Account
+            Create New Account
           </Link>
         </p>
         <div className="divider">OR</div>

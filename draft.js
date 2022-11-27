@@ -12,8 +12,7 @@ const categories = [
 
 const products = [
   {
-    _id: 1,
-    category_id: 1,
+    category_id: "63816d8ce80b236a929df04d",
     category: "Samsung",
     img: "https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-s22-plus-5g.jpg",
     name: "Galaxy S22+ 5G",
