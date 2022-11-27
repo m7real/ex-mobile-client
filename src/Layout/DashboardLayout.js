@@ -26,14 +26,30 @@ const DashboardLayout = () => {
           <ul className="menu p-4 w-80 bg-base-100 lg:bg-inherit text-base-content shadow-lg border-r border-yellow-700">
             {/* <!-- Sidebar content here --> */}
 
-            {isAdmin ? (
-              <>
-                <li>
-                  <Link className="font-semibold" to="/dashboard/allsellers">
+            {/* This will navigate to the dashboard root and will show relevant components conditionally there */}
+            <li>
+              <Link className="font-semibold" to="/dashboard">
+                {isAdmin ? (
+                  <>
                     <MdOutlineSell className="text-xl"></MdOutlineSell>
                     All Sellers
-                  </Link>
-                </li>
+                  </>
+                ) : isSeller ? (
+                  <>
+                    <MdOutlineSell className="text-xl"></MdOutlineSell>
+                    My Products
+                  </>
+                ) : (
+                  <>
+                    <TiShoppingCart className="text-xl"></TiShoppingCart>
+                    My Orders
+                  </>
+                )}
+              </Link>
+            </li>
+
+            {isAdmin && (
+              <>
                 <li>
                   <Link className="font-semibold" to="/dashboard/allbuyers">
                     <FaUsers className="text-xl"></FaUsers>
@@ -47,26 +63,12 @@ const DashboardLayout = () => {
                   </Link>
                 </li>
               </>
-            ) : isSeller ? (
-              <>
-                <li>
-                  <Link className="font-semibold" to="/dashboard/addproduct">
-                    <MdAddCircleOutline className="text-xl"></MdAddCircleOutline>
-                    Add A Product
-                  </Link>
-                </li>
-                <li>
-                  <Link className="font-semibold" to="/dashboard/myproducts">
-                    <MdOutlineSell className="text-xl"></MdOutlineSell>
-                    My Products
-                  </Link>
-                </li>
-              </>
-            ) : (
+            )}
+            {isSeller && (
               <li>
-                <Link className="font-semibold" to="/dashboard">
-                  <TiShoppingCart className="text-xl"></TiShoppingCart>
-                  My Orders
+                <Link className="font-semibold" to="/dashboard/addproduct">
+                  <MdAddCircleOutline className="text-xl"></MdAddCircleOutline>
+                  Add A Product
                 </Link>
               </li>
             )}
