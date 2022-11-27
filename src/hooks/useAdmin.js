@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+// Checks if the user is Admin or not
 const useAdmin = (email) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isAdminLoading, setIsAdminLoading] = useState(true);
