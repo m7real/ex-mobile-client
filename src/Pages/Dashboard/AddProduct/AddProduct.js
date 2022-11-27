@@ -48,9 +48,9 @@ const AddProduct = () => {
             description: data.description,
             condition: data.condition,
             purchasedYear: data.purchasedYear,
-            categoryId: data.category._id,
-            category: data.category.name,
+            categoryId: data.category,
             image: imgData.data.url,
+            status: "available",
           };
 
           //   save product information to the database
@@ -67,7 +67,8 @@ const AddProduct = () => {
               console.log(result);
               if (result.acknowledged) {
                 toast.success(`${data.name} added Successfully`);
-                navigate("/dashboard/myproducts");
+                // it will navigate to the MyProducts page as it is conditionally rendered in the dashboard root for seller
+                navigate("/dashboard");
               }
             });
         }
@@ -123,17 +124,7 @@ const AddProduct = () => {
             />
             {errors.sellerLocation && <p className="text-red-500 mt-2 text-sm">{errors.sellerLocation?.message}</p>}
           </div>
-          <div className="form-control w-full max-w-xs">
-            <label className="label mt-1">
-              <span className="label-text">Description</span>
-            </label>
-            <input
-              type="text"
-              {...register("description", { required: "Description is required" })}
-              className="input input-bordered w-full max-w-xs"
-            />
-            {errors.description && <p className="text-red-500 mt-2 text-sm">{errors.description?.message}</p>}
-          </div>
+
           <div className="form-control w-full max-w-xs">
             <label className="label mt-1">
               <span className="label-text">Condition</span>
@@ -174,7 +165,7 @@ const AddProduct = () => {
             </label>
             <select {...register("category", { required: "Category is required" })} className="select select-bordered w-full max-w-xs">
               {categories.map((category) => (
-                <option key={category._id} value={category}>
+                <option key={category._id} value={category._id}>
                   {category?.name}
                 </option>
               ))}
@@ -183,11 +174,22 @@ const AddProduct = () => {
           </div>
           <div className="form-control w-full max-w-xs">
             <label className="label mt-1">
+              <span className="label-text">Description</span>
+            </label>
+            <textarea
+              {...register("description", { required: "Description is required" })}
+              className="textarea textarea-bordered w-full max-w-xs"
+            ></textarea>
+            {errors.description && <p className="text-red-500 mt-2 text-sm">{errors.description?.message}</p>}
+          </div>
+          <div className="form-control w-full max-w-xs">
+            <label className="label mt-1">
               <span className="label-text">Image</span>
             </label>
             <input type="file" {...register("image", { required: "Image is required" })} className="file-input file-input-bordered w-full max-w-xs" />
             {errors.image && <p className="text-red-500 mt-2 text-sm">{errors.image?.message}</p>}
           </div>
+
           <input className="btn btn-accent w-full mt-4" value="Add" type="submit" />
         </form>
       </div>
