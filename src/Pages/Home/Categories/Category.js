@@ -5,7 +5,7 @@ const Category = ({ category }) => {
   const navigate = useNavigate();
 
   const handleNavigate = () => {
-    navigate(`/category/${category._id}`);
+    navigate(`/category/${category._id}`, { state: category }); // sending category to the products page
   };
 
   return (
