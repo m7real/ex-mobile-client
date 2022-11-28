@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { MdVerifiedUser } from "react-icons/md";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 import Spinner from "../../../components/Spinner/Spinner";
@@ -110,10 +111,15 @@ const MyProducts = () => {
                 <td>{product.status}</td>
                 <td>${product.resalePrice}</td>
                 <td>
-                  {product.advertised || (
+                  {product.advertised || product.status === "sold" || (
                     <button onClick={() => handleAdvertise(product)} className="btn btn-info btn-xs">
                       Advertise
                     </button>
+                  )}
+                  {product.advertised && (
+                    <p>
+                      <MdVerifiedUser className="text-info inline mx-1 mb-1"></MdVerifiedUser> Added
+                    </p>
                   )}
                 </td>
                 <td>
