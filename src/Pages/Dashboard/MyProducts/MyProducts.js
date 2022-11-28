@@ -57,13 +57,14 @@ const MyProducts = () => {
   };
 
   const handleAdvertise = (product) => {
+    const updatedDoc = { product, info: "advertise" };
     fetch(`http://localhost:5000/products/${product._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
       },
-      body: JSON.stringify(product),
+      body: JSON.stringify(updatedDoc),
     })
       .then((res) => res.json())
       .then((data) => {
