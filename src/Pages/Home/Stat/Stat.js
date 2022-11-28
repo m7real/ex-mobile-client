@@ -18,7 +18,7 @@ const Stat = () => {
 
   return (
     <>
-      <h2 className="text-3xl font-bold">Statistics</h2>
+      <h2 className="text-3xl font-bold">Stats</h2>
       <section className="flex justify-center my-10 py-6 shadow-xl border-b border-t border-accent rounded-3xl">
         <div className="stats stats-vertical lg:stats-horizontal ">
           <div className="stat">
