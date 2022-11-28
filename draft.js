@@ -1,6 +1,6 @@
 // admin@exmobile.com:123456a@3A
 
-const categories = [
+const products = [
   {
     name: "Samsung",
   },
