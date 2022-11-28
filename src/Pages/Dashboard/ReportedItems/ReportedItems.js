@@ -6,7 +6,7 @@ import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 import ConfirmationModal from "../../Shared/ConfirmationModal/ConfirmationModal";
 
 const ReportedItems = () => {
-  const { user, logOut } = useContext(AuthContext);
+  const { logOut } = useContext(AuthContext);
   const [deletingProduct, setDeletingProduct] = useState(null);
 
   const url = `http://localhost:5000/products?reported=true`;
@@ -17,7 +17,7 @@ const ReportedItems = () => {
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["products", "reported"],
+    queryKey: ["products", "true"],
     queryFn: async () => {
       const res = await fetch(url, {
         headers: {
@@ -62,14 +62,14 @@ const ReportedItems = () => {
   if (products?.length === 0) {
     return (
       <div className="min-h-screen flex justify-center items-center">
-        <h2 className="text-3xl font-bold text-accent text-center my-8 glass p-5 rounded-2xl">No Products Were Reported</h2>
+        <h2 className="text-3xl font-bold text-accent text-center my-8 glass p-5 rounded-2xl">No Items Were Reported</h2>
       </div>
     );
   }
 
   return (
     <div>
-      <h2 className="text-3xl font-bold text-accent text-center my-8 ">Reported Products</h2>
+      <h2 className="text-3xl font-bold text-accent text-center my-8 ">Reported Items</h2>
       <div className="overflow-x-auto">
         <table className="table w-full">
           <thead>
