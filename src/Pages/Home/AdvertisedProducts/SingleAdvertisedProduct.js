@@ -7,7 +7,7 @@ import { MdVerified } from "react-icons/md";
 import { MdOutlineOutlinedFlag } from "react-icons/md";
 import toast from "react-hot-toast";
 
-const SingleAdvertisedProduct = ({ product, user }) => {
+const SingleAdvertisedProduct = ({ product, user, setBookingItem }) => {
   const {
     _id,
     name,
@@ -20,9 +20,7 @@ const SingleAdvertisedProduct = ({ product, user }) => {
     condition,
     purchasedYear,
     usedYears,
-    categoryId,
     image,
-    status,
     posted,
   } = product;
 
@@ -100,7 +98,9 @@ const SingleAdvertisedProduct = ({ product, user }) => {
             <button onClick={() => handleReportToAdmin(_id)} className="btn btn-outline btn-xs text-red-700 normal-case">
               <MdOutlineOutlinedFlag className="mr-1"></MdOutlineOutlinedFlag> Report To Admin
             </button>
-            <button className="btn btn-primary">Book Now</button>
+            <label htmlFor="booking-modal" onClick={() => setBookingItem(product)} className="btn btn-primary">
+              Book Now
+            </label>
           </div>
         ) : (
           <div className="card-actions items-center justify-end">

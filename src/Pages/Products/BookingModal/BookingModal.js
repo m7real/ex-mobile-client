@@ -4,7 +4,7 @@ import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 
 const BookingModal = ({ bookingItem, setBookingItem }) => {
   // bookingItem is just another name of product
-  const { _id, name, resalePrice, sellerEmail, sellerMobile, categoryId } = bookingItem;
+  const { _id, name, resalePrice, sellerEmail, sellerMobile, categoryId, image } = bookingItem;
   const { user } = useContext(AuthContext);
 
   const handleBooking = (event) => {
@@ -20,9 +20,10 @@ const BookingModal = ({ bookingItem, setBookingItem }) => {
     const booking = {
       buyerName,
       buyerEmail,
-      productId: _id,
       categoryId,
+      productId: _id,
       productName,
+      productImage: image,
       price,
       buyerPhone,
       buyerMeetingLocation,

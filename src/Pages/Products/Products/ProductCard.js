@@ -19,9 +19,7 @@ const ProductCard = ({ product, setBookingItem }) => {
     condition,
     purchasedYear,
     usedYears,
-    categoryId,
     image,
-    status,
     posted,
   } = product;
 

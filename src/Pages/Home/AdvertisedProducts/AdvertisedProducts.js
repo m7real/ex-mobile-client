@@ -1,12 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 import Spinner from "../../../components/Spinner/Spinner";
 import SingleAdvertisedProduct from "./SingleAdvertisedProduct";
 import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
+import BookingModal from "../../Products/BookingModal/BookingModal";
 
 const AdvertisedProducts = () => {
   const { user, loading } = useContext(AuthContext);
+  const [bookingItem, setBookingItem] = useState(null);
 
   const { data: products = [], isLoading } = useQuery({
     queryKey: ["products", "advertised"],
@@ -28,9 +30,10 @@ const AdvertisedProducts = () => {
         <h2 className="text-4xl font-bold">Advertised Items</h2>
         <div className="grid grid-cols-1 gap-8 mt-12 mb-36">
           {products.map((product) => (
-            <SingleAdvertisedProduct key={product._id} product={product} user={user}></SingleAdvertisedProduct>
+            <SingleAdvertisedProduct key={product._id} product={product} setBookingItem={setBookingItem} user={user}></SingleAdvertisedProduct>
           ))}
         </div>
+        {bookingItem && <BookingModal bookingItem={bookingItem} setBookingItem={setBookingItem}></BookingModal>}
       </div>
     );
   }
