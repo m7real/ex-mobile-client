@@ -130,9 +130,9 @@ const AddProduct = () => {
               <span className="label-text">Condition</span>
             </label>
             <select {...register("condition", { required: "Condition is required" })} className="select select-bordered w-full max-w-xs">
-              <option value="excellent">Excellent</option>
-              <option value="good">Good</option>
-              <option value="fair">Fair</option>
+              <option value="Excellent">Excellent</option>
+              <option value="Good">Good</option>
+              <option value="Fair">Fair</option>
             </select>
             {errors.condition && <p className="text-red-500 mt-2 text-sm">{errors.condition?.message}</p>}
           </div>

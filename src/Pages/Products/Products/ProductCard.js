@@ -34,7 +34,7 @@ const ProductCard = ({ product }) => {
 
   return (
     <div className="card lg:card-side bg-base-300 shadow-xl  py-6 px-7">
-      <figure className="min-w-fit ">
+      <figure className="min-w-fit pt-6 lg:pt-0 ">
         <img className="rounded-2xl" src={image} alt="Album" />
       </figure>
       <div className="card-body">
@@ -42,10 +42,7 @@ const ProductCard = ({ product }) => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 my-6">
           <p className="flex items-center justify-start">
             <span className="text-primary mr-2">Seller : </span> {sellerName}{" "}
-            {verified && <MdVerified className=" text-blue-700 ml-1 text-sm" title="Verified Seller"></MdVerified>}
-          </p>
-          <p>
-            <span className="text-primary mr-1">Posted On :</span> {format(posted, "PPpp")}
+            {verified && <MdVerified className=" text-blue-600 ml-1 text-sm" title="Verified Seller"></MdVerified>}
           </p>
           <p>
             <span className="text-primary mr-1">Resale Price:</span> ${resalePrice}
@@ -67,6 +64,9 @@ const ProductCard = ({ product }) => {
           </p>
           <p>
             <span className="text-primary mr-1">Condition:</span> {condition}
+          </p>
+          <p>
+            <span className="text-primary mr-1">Posted On :</span> {format(posted, "PPpp")}
           </p>
         </div>
         <p className="lg:w-2/3">
