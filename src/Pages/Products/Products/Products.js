@@ -22,8 +22,8 @@ const Products = () => {
 
   return (
     <div className="min-h-screen">
-      <h2 className="text-3xl font-bold text-accent text-center my-10"> {category.name} Smartphones </h2>
-      <div className="grid grid-cols-1 gap-6">
+      <h2 className="text-3xl font-bold text-accent text-center my-10 "> {category.name} Smartphones </h2>
+      <div className="grid grid-cols-1 gap-8">
         {products.map((product) => (
           <ProductCard key={product._id} product={product}></ProductCard>
         ))}

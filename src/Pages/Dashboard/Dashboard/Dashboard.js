@@ -9,8 +9,8 @@ import MyProducts from "../MyProducts/MyProducts";
 
 const Dashboard = () => {
   const { user, loading } = useContext(AuthContext);
-  const [isAdmin, isAdminLoading] = useAdmin(user?.email);
-  const [isSeller, isSellerLoading] = useSeller(user?.email);
+  const { isAdmin, isAdminLoading } = useAdmin(user?.email);
+  const { isSeller, isSellerLoading } = useSeller(user?.email);
 
   if (loading || isAdminLoading || isSellerLoading) {
     return <Spinner></Spinner>;

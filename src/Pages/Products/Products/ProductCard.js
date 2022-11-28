@@ -1,4 +1,8 @@
 import React from "react";
+import { format } from "date-fns";
+import useSeller from "../../../hooks/useSeller";
+import Spinner from "../../../components/Spinner/Spinner";
+import { MdVerified } from "react-icons/md";
 
 const ProductCard = ({ product }) => {
   const {
@@ -12,22 +16,64 @@ const ProductCard = ({ product }) => {
     description,
     condition,
     purchasedYear,
+    usedYears,
     categoryId,
     image,
     status,
     posted,
   } = product;
 
+  const { seller, isSellerLoading } = useSeller(sellerEmail);
+
+  if (isSellerLoading) {
+    return <Spinner small={true}></Spinner>;
+  }
+
+  //   destructuring after properly loading seller
+  const { _id: sellerId, name: sellerName, verified } = seller;
+
   return (
-    <div className="card lg:card-side bg-base-100 shadow-2xl border border-accent">
-      <figure>
-        <img src={image} alt="Album" />
+    <div className="card lg:card-side bg-base-300 shadow-xl  py-6 px-7">
+      <figure className="min-w-fit ">
+        <img className="rounded-2xl" src={image} alt="Album" />
       </figure>
       <div className="card-body">
-        <h2 className="card-title">New album is released!</h2>
-        <p>Click the button to listen on Spotiwhy app.</p>
+        <h2 className="card-title mx-auto">{name}</h2>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 my-6">
+          <p className="flex items-center justify-start">
+            <span className="text-primary mr-2">Seller : </span> {sellerName}{" "}
+            {verified && <MdVerified className=" text-blue-700 ml-1 text-sm" title="Verified Seller"></MdVerified>}
+          </p>
+          <p>
+            <span className="text-primary mr-1">Posted On :</span> {format(posted, "PPpp")}
+          </p>
+          <p>
+            <span className="text-primary mr-1">Resale Price:</span> ${resalePrice}
+          </p>
+          <p>
+            <span className="text-primary mr-1">Original Price:</span> ${originalPrice}
+          </p>
+          <p>
+            <span className="text-primary mr-1">Location:</span> {sellerLocation}
+          </p>
+          <p>
+            <span className="text-primary mr-1">Mobile:</span> {sellerMobile}
+          </p>
+          <p>
+            <span className="text-primary mr-1">Purchased Year:</span> {purchasedYear}
+          </p>
+          <p>
+            <span className="text-primary mr-1">Used For:</span> {usedYears} {usedYears > 1 ? "Years" : "Year"}
+          </p>
+          <p>
+            <span className="text-primary mr-1">Condition:</span> {condition}
+          </p>
+        </div>
+        <p className="lg:w-2/3">
+          <span className="text-primary mr-1">Description:</span> {description}
+        </p>
         <div className="card-actions justify-end">
-          <button className="btn btn-primary">Listen</button>
+          <button className="btn btn-primary">Book Now</button>
         </div>
       </div>
     </div>
@@ -35,20 +81,3 @@ const ProductCard = ({ product }) => {
 };
 
 export default ProductCard;
-
-/* const p = {
-  categoryId: "63816d8ce80b236a929df04e",
-  condition: "good",
-  description: "I want to buy new iPhone 15 pro max. For that I need a lot of money. I don't need this phone anymore. You can grab this chance.",
-  image: "https://i.ibb.co/9pdBwS6/apple-iphone-13-pro.jpg",
-  name: "iPhone 13 Pro",
-  originalPrice: "68000",
-  posted: 1669568642010,
-  purchasedYear: "2020",
-  resalePrice: "35000",
-  sellerEmail: "shamim@exmobile.com",
-  sellerLocation: "Dhaka",
-  sellerMobile: "01515336587",
-  status: "available",
-  _id: "6383988250354e597250ad5a",
-}; */

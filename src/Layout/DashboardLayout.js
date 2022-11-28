@@ -11,8 +11,8 @@ import Spinner from "../components/Spinner/Spinner";
 
 const DashboardLayout = () => {
   const { user } = useContext(AuthContext);
-  const [isAdmin, isAdminLoading] = useAdmin(user?.email);
-  const [isSeller, isSellerLoading] = useSeller(user?.email);
+  const { isAdmin, isAdminLoading } = useAdmin(user?.email);
+  const { isSeller, isSellerLoading } = useSeller(user?.email);
 
   return (
     <div>
