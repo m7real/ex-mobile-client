@@ -8,7 +8,7 @@ const FAQ = () => {
   const [faqs, setFaqs] = useState([]);
 
   useEffect(() => {
-    fetch("https://assignment-11-server-swart.vercel.app/faq")
+    fetch("http://localhost:5000/faq")
       .then((res) => res.json())
       .then((data) => setFaqs(data));
   }, []);

@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../../Layout/DashboardLayout";
 import Main from "../../Layout/Main";
+import Blog from "../../Pages/Blog/Blog/Blog";
 import AddProduct from "../../Pages/Dashboard/AddProduct/AddProduct";
 import AllBuyers from "../../Pages/Dashboard/AllBuyers/AllBuyers";
 import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
@@ -35,6 +36,11 @@ const router = createBrowserRouter([
               authorization: `bearer ${localStorage.getItem("accessToken")}`,
             },
           }),
+      },
+      {
+        path: "/blog",
+        element: <Blog></Blog>,
+        loader: () => fetch("http://localhost:5000/blog"),
       },
       {
         path: "/login",
