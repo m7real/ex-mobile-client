@@ -31,7 +31,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/products?category=${params.id}`, {
+          fetch(`https://ex-mobile.vercel.app/products?category=${params.id}`, {
             headers: {
               authorization: `bearer ${localStorage.getItem("accessToken")}`,
             },
@@ -40,7 +40,7 @@ const router = createBrowserRouter([
       {
         path: "/blogs",
         element: <Blog></Blog>,
-        loader: () => fetch("http://localhost:5000/blog"),
+        loader: () => fetch("https://ex-mobile.vercel.app/blog"),
       },
       {
         path: "/login",

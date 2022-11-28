@@ -9,7 +9,7 @@ const AllBuyers = () => {
   const { logOut } = useContext(AuthContext);
   const [deletingBuyer, setDeletingBuyer] = useState(null);
 
-  const url = `http://localhost:5000/users?type=buyer`;
+  const url = `https://ex-mobile.vercel.app/users?type=buyer`;
 
   //   fetching reported users
   const {
@@ -40,7 +40,7 @@ const AllBuyers = () => {
 
   // delete a product
   const handleDeleteBuyer = (buyer) => {
-    fetch(`http://localhost:5000/users/${buyer?._id}`, {
+    fetch(`https://ex-mobile.vercel.app/users/${buyer?._id}`, {
       method: "DELETE",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -58,7 +58,7 @@ const AllBuyers = () => {
 
   // convert a buyer (general user) to admin
   const handleMakeAdmin = (buyer) => {
-    fetch(`http://localhost:5000/users/admin/${buyer._id}`, {
+    fetch(`https://ex-mobile.vercel.app/users/admin/${buyer._id}`, {
       method: "PUT",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,

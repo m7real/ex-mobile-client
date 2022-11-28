@@ -7,7 +7,7 @@ const Stat = () => {
   const { data: stats = {}, isLoading } = useQuery({
     queryKey: ["stats"],
     queryFn: async () => {
-      const data = await axios.get("http://localhost:5000/stats");
+      const data = await axios.get("https://ex-mobile.vercel.app/stats");
       return data.data;
     },
   });

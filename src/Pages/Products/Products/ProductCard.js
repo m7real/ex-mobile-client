@@ -27,7 +27,7 @@ const ProductCard = ({ product, setBookingItem }) => {
 
   const handleReportToAdmin = (id) => {
     const updatedDoc = { info: "reported" };
-    fetch(`http://localhost:5000/products/${id}`, {
+    fetch(`https://ex-mobile.vercel.app/products/${id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

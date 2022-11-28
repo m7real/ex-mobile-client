@@ -10,7 +10,7 @@ const AllSellers = () => {
   const { logOut } = useContext(AuthContext);
   const [deletingSeller, setDeletingSeller] = useState(null);
 
-  const url = `http://localhost:5000/users?type=seller`;
+  const url = `https://ex-mobile.vercel.app/users?type=seller`;
 
   //   fetching reported users
   const {
@@ -41,7 +41,7 @@ const AllSellers = () => {
 
   // delete a product
   const handleDeleteSeller = (seller) => {
-    fetch(`http://localhost:5000/users/${seller?._id}`, {
+    fetch(`https://ex-mobile.vercel.app/users/${seller?._id}`, {
       method: "DELETE",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -58,7 +58,7 @@ const AllSellers = () => {
   };
 
   const handleVerifySeller = (seller) => {
-    fetch(`http://localhost:5000/users/seller/${seller._id}`, {
+    fetch(`https://ex-mobile.vercel.app/users/seller/${seller._id}`, {
       method: "PUT",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,

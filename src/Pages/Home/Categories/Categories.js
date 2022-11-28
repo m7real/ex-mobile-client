@@ -8,7 +8,7 @@ const Categories = () => {
   const { data: categories = [], isLoading } = useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
-      const data = await axios.get("http://localhost:5000/categories");
+      const data = await axios.get("https://ex-mobile.vercel.app/categories");
       return data.data;
     },
   });

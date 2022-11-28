@@ -31,7 +31,7 @@ const BookingModal = ({ bookingItem, setBookingItem }) => {
       sellerMobile,
     };
 
-    fetch("http://localhost:5000/bookings", {
+    fetch("https://ex-mobile.vercel.app/bookings", {
       method: "POST",
       headers: {
         "content-type": "application/json",

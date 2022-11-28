@@ -10,7 +10,7 @@ const MyProducts = () => {
   const { user, logOut } = useContext(AuthContext);
   const [deletingProduct, setDeletingProduct] = useState(null);
 
-  const url = `http://localhost:5000/products?email=${user?.email}`;
+  const url = `https://ex-mobile.vercel.app/products?email=${user?.email}`;
 
   //   fetching products based on seller
   const {
@@ -41,7 +41,7 @@ const MyProducts = () => {
 
   // delete a product
   const handleDeleteProduct = (product) => {
-    fetch(`http://localhost:5000/products/${product?._id}`, {
+    fetch(`https://ex-mobile.vercel.app/products/${product?._id}`, {
       method: "DELETE",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -59,7 +59,7 @@ const MyProducts = () => {
 
   const handleAdvertise = (product) => {
     const updatedDoc = { product, info: "advertise" };
-    fetch(`http://localhost:5000/products/${product._id}`, {
+    fetch(`https://ex-mobile.vercel.app/products/${product._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

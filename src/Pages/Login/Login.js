@@ -47,7 +47,7 @@ const Login = () => {
   // save google sign in user in the database
   const saveUser = (name, email, role = "buyer") => {
     const user = { name, email, role };
-    fetch("http://localhost:5000/users", {
+    fetch("https://ex-mobile.vercel.app/users", {
       method: "POST",
       headers: {
         "content-type": "application/json",

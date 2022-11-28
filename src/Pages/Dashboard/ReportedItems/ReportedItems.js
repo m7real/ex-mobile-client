@@ -9,7 +9,7 @@ const ReportedItems = () => {
   const { logOut } = useContext(AuthContext);
   const [deletingProduct, setDeletingProduct] = useState(null);
 
-  const url = `http://localhost:5000/products?reported=true`;
+  const url = `https://ex-mobile.vercel.app/products?reported=true`;
 
   //   fetching reported products
   const {
@@ -40,7 +40,7 @@ const ReportedItems = () => {
 
   // delete a product
   const handleDeleteProduct = (product) => {
-    fetch(`http://localhost:5000/products/${product?._id}`, {
+    fetch(`https://ex-mobile.vercel.app/products/${product?._id}`, {
       method: "DELETE",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
