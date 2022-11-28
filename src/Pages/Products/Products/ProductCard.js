@@ -3,6 +3,8 @@ import { format } from "date-fns";
 import useSeller from "../../../hooks/useSeller";
 import Spinner from "../../../components/Spinner/Spinner";
 import { MdVerified } from "react-icons/md";
+import { MdOutlineOutlinedFlag } from "react-icons/md";
+import toast from "react-hot-toast";
 
 const ProductCard = ({ product }) => {
   const {
@@ -24,6 +26,25 @@ const ProductCard = ({ product }) => {
   } = product;
 
   const { seller, isSellerLoading } = useSeller(sellerEmail);
+
+  const handleReportToAdmin = (id) => {
+    const updatedDoc = { info: "reported" };
+    fetch(`http://localhost:5000/products/${id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+      body: JSON.stringify(updatedDoc),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // ignored modified count as it will prevent report successful toast for all other users if there is at least one user reports.
+        if (data.acknowledged) {
+          toast.success("Successfully Reported To Admin");
+        }
+      });
+  };
 
   if (isSellerLoading) {
     return <Spinner small={true}></Spinner>;
@@ -72,7 +93,10 @@ const ProductCard = ({ product }) => {
         <p className="lg:w-2/3">
           <span className="text-primary mr-1">Description:</span> {description}
         </p>
-        <div className="card-actions justify-end">
+        <div className="card-actions items-center justify-between">
+          <button onClick={() => handleReportToAdmin(_id)} className="btn btn-outline btn-xs text-red-700 normal-case">
+            <MdOutlineOutlinedFlag className="mr-1"></MdOutlineOutlinedFlag> Report To Admin
+          </button>
           <button className="btn btn-primary">Book Now</button>
         </div>
       </div>
