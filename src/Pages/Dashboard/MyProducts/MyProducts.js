@@ -11,6 +11,7 @@ const MyProducts = () => {
 
   const url = `http://localhost:5000/products?email=${user?.email}`;
 
+  //   fetching products based on seller
   const {
     data: products = [],
     isLoading,
@@ -37,6 +38,7 @@ const MyProducts = () => {
     setDeletingProduct(null);
   };
 
+  // delete a product
   const handleDeleteProduct = (product) => {
     fetch(`http://localhost:5000/products/${product?._id}`, {
       method: "DELETE",
@@ -52,6 +54,25 @@ const MyProducts = () => {
         }
       })
       .catch((err) => console.error(err));
+  };
+
+  const handleAdvertise = (product) => {
+    fetch(`http://localhost:5000/products/${product._id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+      body: JSON.stringify(product),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.modifiedCount > 0) {
+          toast.success("Successfully Advertised ");
+          refetch();
+        }
+      });
   };
 
   if (isLoading) {
@@ -88,7 +109,11 @@ const MyProducts = () => {
                 <td>{product.status}</td>
                 <td>${product.resalePrice}</td>
                 <td>
-                  <button className="btn btn-info btn-xs">Advertise</button>
+                  {product.advertised || (
+                    <button onClick={() => handleAdvertise(product)} className="btn btn-info btn-xs">
+                      Advertise
+                    </button>
+                  )}
                 </td>
                 <td>
                   <label onClick={() => setDeletingProduct(product)} htmlFor="confirmation-modal" className="btn btn-error btn-xs">
