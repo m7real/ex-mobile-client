@@ -53,8 +53,8 @@ const ProductCard = ({ product, setBookingItem }) => {
 
   return (
     <div className="card lg:card-side bg-base-300 shadow-xl  py-6 px-7">
-      <figure className="min-w-fit pt-6 lg:pt-0 ">
-        <img className="rounded-2xl" src={image} alt="Album" />
+      <figure className="max-w-xs  pt-6 lg:pt-0 ">
+        <img className="rounded-2xl  " src={image} alt="Album" />
       </figure>
       <div className="card-body">
         <h2 className="card-title mx-auto">{name}</h2>

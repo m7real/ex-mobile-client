@@ -19,7 +19,7 @@ const DashboardLayout = () => {
       <Navbar></Navbar>
       <div className="drawer drawer-mobile h-auto">
         <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content min-h-screen  border-l border-yellow-700">
+        <div className="drawer-content min-h-screen  lg:border-l border-yellow-700">
           <Outlet></Outlet>
         </div>
         <div className="drawer-side">
